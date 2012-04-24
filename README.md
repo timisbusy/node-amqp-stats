@@ -45,6 +45,6 @@ This will return a list of your queues with lots of data about their rate of use
 
     stats.queues(callback);
 
-Note that when you lack admin priviledges (on heroku instances for example) you may not be able to get at certain parts of this API. You can check your status with:
+Note that when you lack admin privileges (on heroku instances for example) you may not be able to get at certain parts of this API. You can check your status with:
     
     stats.whoami(callback);

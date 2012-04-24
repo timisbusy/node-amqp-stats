@@ -30,7 +30,7 @@ Instantiate and provide authentication details (defaults to standard setup for a
       hostname: "AMQP_HOSTNAME"  // default: localhost:55672
     });
 
-NOTE: for AMQP instances running on heroku, the hostname should look something like: 
+NOTE: for RabbitMQ instances running on heroku, the hostname should look something like: 
 
     heroku.srs.rabbitmq.com/rabbitmq/sdaewywqh
 

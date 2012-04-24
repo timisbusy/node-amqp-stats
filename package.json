@@ -4,7 +4,7 @@
   "description": "Interface for RabbitMQ Management statistics. http://www.rabbitmq.com/management.html",
   "version": "0.0.0",
   "repository": {
-    "url": ""
+    "url": "https://github.com/timisbusy/node-amqp-stats"
   },
   "main": "index.js",
   "engines": {

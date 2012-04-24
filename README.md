@@ -1,11 +1,11 @@
 # Node.js Interface for RabbitMQ Management Statistics
 
-## This package creates an easy interface for getting statistics from a RabbitMQ instance with the management plugin installed. Read more about the management plugin here:
+### This package creates an easy interface for getting statistics from a RabbitMQ instance with the management plugin installed. Read more about the management plugin here:
 
 - http://www.rabbitmq.com/management.html
 - http://hg.rabbitmq.com/rabbitmq-management/raw-file/rabbitmq_v2_8_1/priv/www/api/index.html
 
-## Required:
+## Required
 
 You will need:
 

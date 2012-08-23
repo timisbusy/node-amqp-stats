@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/timisbusy/node-amqp-stats.png)](http://travis-ci.org/timisbusy/node-amqp-stats)
 # Node.js Interface for RabbitMQ Management Statistics
 
 ### This package creates an easy interface for getting statistics from a RabbitMQ instance with the management plugin installed. Read more about the management plugin here:

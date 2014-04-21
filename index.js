@@ -6,6 +6,7 @@ function AmqpStats (_options) {
   this.hostname = options.hostname || 'localhost:55672';
   this.username = options.username || 'guest';
   this.password = options.password || 'guest';
+  this.protocol = options.protocol || 'http';
 };
 
 // Overview
@@ -179,7 +180,7 @@ AmqpStats.prototype.alive = function alivenessTest (vhost, callback) {
 AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, callback) {
   request({
     method: method,
-    url: "http://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path + qs.stringify(params),
+    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path + qs.stringify(params),
     body: qs.stringify(params),
     form: true
   }, function(err, res, data){

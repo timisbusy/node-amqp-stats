@@ -27,9 +27,10 @@ Instantiate and provide authentication details (defaults to standard setup for a
     var stats = new AMQPStats({
       username: "AMQP_USERNAME", // default: guest
       password: "AMQP_PASSWORD", // default: guest
-      hostname: "AMQP_HOSTNAME"  // default: localhost:55672
+      hostname: "AMQP_HOSTNAME",  // default: localhost:55672
+      protocol: "HTTP_OR_HTTPS"  // default: http
     });
-
+    
 NOTE: for RabbitMQ instances running on heroku, the hostname should look something like: 
 
     heroku.srs.rabbitmq.com/rabbitmq/sdaewywqh

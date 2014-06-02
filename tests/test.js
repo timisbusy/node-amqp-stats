@@ -1,6 +1,7 @@
 var Stats = require('../index.js');
+var conf = require('./conf.json');
 
-var stats = new Stats(); // defaults to localhost, be sure you have mgmt plugin installed: http://www.rabbitmq.com/management.html
+var stats = new Stats(conf); // defaults to localhost, be sure you have mgmt plugin installed: http://www.rabbitmq.com/management.html
 
 stats.whoami(function (err, res, data) {
   if(err) { throw err; }

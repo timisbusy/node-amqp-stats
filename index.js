@@ -169,6 +169,13 @@ AmqpStats.prototype.getPermissionsForUserOnVHost = function getPermissionsForUse
   this.sendRequest('GET', '/permissions/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/', {}, callback);
 };
 
+// Policies
+
+AmqpStats.prototype.policies = function getPolicies (callback) {
+  this.sendRequest('GET', 'policies/', {}, callback);
+};
+
+
 // Aliveness
 
 AmqpStats.prototype.alive = function alivenessTest (vhost, callback) {
@@ -187,7 +194,7 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
     //console.log(err);
     //console.log(res.statusCode);
     //console.log('data: ', data);
-    if (err) { 
+    if (err) {
       callback(err);
     } else if (res.statusCode > 200) {
       callback(new Error("Status code: "+ res.statusCode));

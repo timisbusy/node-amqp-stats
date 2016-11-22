@@ -122,7 +122,7 @@ AmqpStats.prototype.getBindingsForVHost = function getBindingsForVHost (vhost, c
 };
 
 AmqpStats.prototype.getBindingsForExchangeAndQueue = function getBindingsForExchangeAndQueue (vhost, exchange, queue, callback) {
-  this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/e/' + encodeURIComponent(exchange) + '/q/' + encodeURIComponent(queue) + '/', {}, callback);
+  this.sendRequest('GET', 'bindings/' + encodeURIComponent(vhost) + '/e/' + encodeURIComponent(exchange) + '/q/' + encodeURIComponent(queue) + '/', {}, callback);
 };
 
 // Virtual Hosts

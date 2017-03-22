@@ -1,5 +1,5 @@
 var Stats = require('../index.js');
-var conf = require('./conf.json');
+var conf = require(__dirname + '/conf.js');
 
 var stats = new Stats(conf); // defaults to localhost, be sure you have mgmt plugin installed: http://www.rabbitmq.com/management.html
 

@@ -12,8 +12,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "request": "~2.69.0",
-    "qs": "1.2.1"
+    "request": "~2.82.0",
+    "qs": "6.4.0"
   },
   "devDependencies": {}
 }

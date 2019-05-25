@@ -15,13 +15,13 @@ You will need:
 
 ## Installation
 
-    npm install amqp-stats-promised
+    npm install amqp-stats
 
 ## Usage
 
 Require the amqp-stats package: 
 
-    var AMQPStats = require('amqp-stats-promised');
+    var AMQPStats = require('amqp-stats');
 
 Instantiate and provide authentication details (defaults to standard setup for a local instance). 
 

@@ -5,6 +5,9 @@
 - http://www.rabbitmq.com/management.html
 - https://cdn.rawgit.com/rabbitmq/rabbitmq-management/v3.7.15/priv/www/api/index.html
 
+## First Version Project Made by; Tim Atkinson, Repository: https://github.com/timisbusy/node-amqp-stats
+## This Project is using Promises.
+
 ## Required
 
 You will need:
@@ -15,13 +18,13 @@ You will need:
 
 ## Installation
 
-    npm install amqp-stats
+    npm install amqp-stats-promised
 
 ## Usage
 
 Require the amqp-stats package: 
 
-    var AMQPStats = require('amqp-stats');
+    var AMQPStats = require('amqp-stats-promised');
 
 Instantiate and provide authentication details (defaults to standard setup for a local instance). 
 
@@ -59,3 +62,4 @@ Note that when you lack admin privileges (on heroku instances for example) you m
 
     const whoami = stats.whoami();
     console.log(whoami);
+

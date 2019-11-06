@@ -1,19 +1,35 @@
 {
-  "author": "Tim Atkinson <tim@gochime.com> (http://timisbusy.com)",
-  "name": "amqp-stats",
+  "name": "amqp-stats-promised",
+  "author": "Keven Leone",
+  "version": "1.0.2",
   "description": "Interface for RabbitMQ Management statistics. http://www.rabbitmq.com/management.html",
-  "version": "0.0.14",
-  "repository": {
-    "url": "https://github.com/timisbusy/node-amqp-stats"
-  },
   "main": "index.js",
-  "engines": {
-    "node": "~0.6.0"
+  "repository": {
+    "url": "https://github.com/kevenleone/node-amqp-stats"
   },
+  "contributors": [
+    {
+      "name": "Keven Leone",
+      "email": "keven.santos.sz@gmail.com",
+      "url": "https://github.com/kevenleone"
+    }, 
+    {
+      "name": "Tim Atkinson",
+      "email": "tim@gochime.com",
+      "url": "http://timisbusy.com"
+    }
+  ],
+  "scripts": {
+    "test": "node tests/test.js"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "request": "~2.69.0",
-    "qs": "1.2.1"
-  },
-  "devDependencies": {}
+    "qs": "^6.7.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
 }

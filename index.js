@@ -1,203 +1,319 @@
-var request = require('request'),
-    qs = require('qs');
+const request = require('request-promise');
+const qs = require('qs');
 
-function AmqpStats (_options) {
-  var options = _options || {};
-  this.hostname = options.hostname || 'localhost:55672';
-  this.username = options.username || 'guest';
-  this.password = options.password || 'guest';
-  this.protocol = options.protocol || 'http';
-};
+/**
+ * @class AmqpStats
+ * @description AmqpStats was build for node.js was original built by https://github.com/timisbusy/node-amqp-stats, user timisbusy, 
+ * this project is a new AmqpStats using Promises as default and ES6 features.
+ * @version 1.0.0
+ */
 
-// Overview
+class AmqpStats {
+	constructor(_options) {
+		const options = _options || {};
+		this.hostname = options.hostname || 'localhost:55672';
+		this.username = options.username || 'guest';
+		this.password = options.password || 'guest';
+		this.protocol = options.protocol || 'http';
+	}
 
-AmqpStats.prototype.overview = function getOverview (callback) {
-  this.sendRequest('GET', 'overview/', {}, callback);
-};
+	/**
+	 * @description Various random bits of information that describe the whole system.
+	 */
 
-// Nodes
+	async overview() {
+		return this.sendRequest('GET', 'overview/');
+	}
 
-AmqpStats.prototype.nodes = function getNodes (callback) {
-  this.sendRequest('GET', 'nodes/', {}, callback);
-};
+	/**
+	 * @description A list of nodes in the RabbitMQ cluster.
+	 */
 
-AmqpStats.prototype.getNode = function getNode (name, callback) {
-  this.sendRequest('GET', 'nodes/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	async nodes() {
+		return this.sendRequest('GET', 'nodes/');
+	}
 
-// Extensions
+	/**
+	 * @param {*} name Node Name
+	 * @description An individual node in the RabbitMQ cluster.
+	 */
 
-AmqpStats.prototype.extensions = function getExtensions (callback) {
-  this.sendRequest('GET', 'extensions/', {}, callback);
-};
+	async getNode(name) {
+		return this.sendRequest('GET', 'nodes/' + encodeURIComponent(name) + '/');
+	}
 
-AmqpStats.prototype.definitions = function getDefinitions (callback) {
-  this.sendRequest('GET', 'definitions/', {}, callback);
-};
+	/**
+	 * @description A list of extensions to the management plugin.
+	 */
+	
+	async extensions() {
+		return this.sendRequest('GET', 'extensions/');
+	}
 
-// Connections
+	/**
+	 * @description The server definitions - exchanges, queues, bindings, users, virtual hosts, permissions, topic permissions, and parameters. Everything apart from messages.
+	 */
 
-AmqpStats.prototype.connections = function getConnections (callback) {
-  this.sendRequest('GET', 'connections/', {}, callback);
-};
+	async definitions() {
+		return this.sendRequest('GET', 'definitions/');
+	};
 
-AmqpStats.prototype.getConnection = function getConnection (name, callback) {
-  this.sendRequest('GET', 'connections/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all open connections.
+	 */
 
-// Channels
+	async connections() {
+		return this.sendRequest('GET', 'connections/');
+	}
+	/**
+	 * @param {*} name Name of connection.
+	 * @description An individual connection.
+	 */
 
-AmqpStats.prototype.channels = function getChannels (options, callback) {
-  if(typeof options === 'function'){
-    callback = options;
-    options = {};
-  }
-  this.sendRequest('GET', 'channels/', options, callback);
-};
+	async getConnection(name) {
+		return this.sendRequest('GET', 'connections/' + encodeURIComponent(name) + '/');
+	};
 
-AmqpStats.prototype.getChannel = function getChannel (name, callback) {
-  this.sendRequest('GET', 'channels/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all open channels.
+	 */
 
-// Exchanges
+	async channels() {
+		return this.sendRequest('GET', 'channels/');
+	};
 
-AmqpStats.prototype.exchanges = function getExchanges (options, callback) {
-  if(typeof options === 'function'){
-    callback = options;
-    options = {};
-  }
-  this.sendRequest('GET', 'exchanges/', options, callback);
-};
+	/**
+	 * @param {*} name Channel Name
+	 * @description Details about an individual channel.
+	 */
 
-AmqpStats.prototype.getExchangesForVHost = function getExchangesForVHost (vhost, callback) {
-  this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/', {}, callback);
-};
+	async getChannel(name) {
+		return this.sendRequest('GET', 'channels/' + encodeURIComponent(name) + '/');
+	};
 
-AmqpStats.prototype.getExchange = function getExchange (vhost, name, callback) {
-  this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all exchanges.
+	 */
 
-AmqpStats.prototype.getBindingsWithSource = function getBindingsWithSource (vhost, name, callback) {
-  this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/source/', {}, callback);
-};
+	async exchanges() {
+		return this.sendRequest('GET', 'exchanges/');
+	};
 
-AmqpStats.prototype.getBindingsWithDestination = function getBindingsWithDestination (vhost, name, callback) {
-  this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/destination/', {}, callback);
-};
+	/**
+	 * 
+	 * @param {*} vhost vhost name
+	 * @description A list of all exchanges in a given virtual host.
+	 */
 
-// Queues
+	async getExchangesForVHost(vhost) {
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/');
+	}
 
-AmqpStats.prototype.queues = function getQueues (options, callback) {
-  if(typeof options === 'function'){
-    callback = options;
-    options = {};
-  }
-  this.sendRequest('GET', 'queues/', options, callback);
-};
+	/**
+	 * @description An individual exchange.
+	 * @param {*} vhost vhost name
+	 * @param {*} name exchange name
+	 */
 
-AmqpStats.prototype.getQueuesForVHost = function getQueuesForVHost (vhost, callback) {
-  this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/', {}, callback);
-};
+	async getExchange(vhost, name) {
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+	};
 
-AmqpStats.prototype.getQueue = function getQueue (vhost, name, callback) {
-  this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all bindings in which a given exchange is the source.
+	 * @param {*} vhost vhost name
+	 * @param {*} name exchange name
+	 */
 
-AmqpStats.prototype.getBindingsForQueue = function getBindingsForQueue (vhost, name, callback) {
-  this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/', {}, callback);
-};
+	async getBindingsWithSource(vhost, name) {
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/source/');
+	};
 
-// Bindings
+	/**
+	 * @description A list of all bindings in which a given exchange is the destination.
+	 * @param {*} vhost vhost name
+	 * @param {*} name exchange name
+	 */
 
-AmqpStats.prototype.bindings = function getBindings (options, callback) {
-  if(typeof options === 'function'){
-    callback = options;
-    options = {};
-  }
-  this.sendRequest('GET', 'bindings/', options, callback);
-};
+	async getBindingsWithDestination(vhost, name) {
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/destination/');
+	};
 
-AmqpStats.prototype.getBindingsForVHost = function getBindingsForVHost (vhost, callback) {
-  this.sendRequest('GET', 'bindings/' + encodeURIComponent(vhost) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all queues.
+	 */
 
-AmqpStats.prototype.getBindingsForExchangeAndQueue = function getBindingsForExchangeAndQueue (vhost, exchange, queue, callback) {
-  this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/e/' + encodeURIComponent(exchange) + '/q/' + encodeURIComponent(queue) + '/', {}, callback);
-};
+	async queues() {
+		return this.sendRequest('GET', 'queues/');
+	};
 
-// Virtual Hosts
+	/**
+	 * @description A list of all queues in a given virtual host.
+	 * @param {*} vhost vhost name
+	 */
 
-AmqpStats.prototype.vhosts = function getVHosts (callback) {
-  this.sendRequest('GET', 'vhosts/', {}, callback);
-};
+	async getQueuesForVHost(vhost) {
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/');
+	};
 
-AmqpStats.prototype.getVHost = function getVHost (name, callback) {
-  this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description An individual queue.
+	 * @param {*} vhost vhost name
+	 * @param {*} name queue name
+	 */
 
-AmqpStats.prototype.getVHostPermissions = function getVHostPermissions (name, callback) {
-  this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/permissions/', {}, callback);
-};
+	async getQueue(vhost, name) {
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+	};
 
-// Users
+	/**
+	 * @description A list of all bindings on a given queue.
+	 * @param {*} vhost vhost name
+	 * @param {*} name queue name
+	 */
 
-AmqpStats.prototype.users = function getUsers (callback) {
-  this.sendRequest('GET', 'users/', {}, callback);
-};
+	async getBindingsForQueue(vhost, name) {
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/');
+	};
 
-AmqpStats.prototype.getUser = function getUser (name, callback) {
-  this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all bindings.
+	 */
 
-AmqpStats.prototype.getUserPermissions = function getVHostPermissions (name, callback) {
-  this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/permissions/', {}, callback);
-};
+	async bindings() {
+		return this.sendRequest('GET', 'bindings/');
+	};
 
-// Who Am I?
+	/**
+	 * @description A list of all bindings in a given virtual host.
+	 * @param {*} vhost vhost name
+	 */
 
-AmqpStats.prototype.whoami = function whoami (callback) {
-  this.sendRequest('GET', 'whoami/', {}, callback);
-};
+	async getBindingsForVHost(vhost) {
+		return this.sendRequest('GET', 'bindings/' + encodeURIComponent(vhost) + '/');
+	};
 
-// Permissions
+	/**
+	 * @description A list of all bindings between an exchange and a queue. Remember, an exchange and a queue can be bound together many times!
+	 * @param {*} vhost vhost name
+	 * @param {*} exchange exchange name
+	 * @param {*} queue queue name
+	 */
 
-AmqpStats.prototype.permissions = function getPermissions (callback) {
-  this.sendRequest('GET', 'permissions/', {}, callback);
-};
+	async getBindingsForExchangeAndQueue(vhost, exchange, queue) {
+		return this.sendRequest('GET', `queues/${encodeURIComponent(vhost)}/e/${encodeURIComponent(exchange)}/q/${encodeURIComponent(queue)}/`);
+	};
 
-AmqpStats.prototype.getPermissionsForUserOnVHost = function getPermissionsForUserOnVHost (vhost, name, callback) {
-  this.sendRequest('GET', '/permissions/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/', {}, callback);
-};
+	/**
+	 * @description A list of all vhosts.
+	 */
 
-// Aliveness
+	async vhosts() {
+		return this.sendRequest('GET', 'vhosts/');
+	};
 
-AmqpStats.prototype.alive = function alivenessTest (vhost, callback) {
-  this.sendRequest('GET', 'aliveness-test/' + encodeURIComponent(vhost) + '/', {}, callback);
-};
+	/**
+	 * @description An individual virtual host.
+	 * @param {*} name vhost name
+	 */
 
-// Utility used by all other calls. Can also be used seperately to make any API call not specified above.
+	async getVHost(name) {
+		return this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/');
+	};
 
-AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, callback) {
-  request({
-    method: method,
-    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path + qs.stringify(params),
-    body: qs.stringify(params),
-    form: true
-  }, function(err, res, data){
-    //console.log(err);
-    //console.log(res.statusCode);
-    //console.log('data: ', data);
-    if (err) { 
-      callback(err);
-    } else if (res.statusCode > 200) {
-      callback(new Error("Status code: "+ res.statusCode));
-    } else if (data === "Not found.") {
-      callback(new Error("Undefined."));
-    } else {
-      data = JSON.parse(data);
-      callback(null, res, data);
-    }
-  });
+	/**
+	 * @description A list of all permissions for a given virtual host.
+	 * @param {*} name vhost name
+	 */
+
+	async getVHostPermissions(name) {
+		return this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/permissions/');
+	};
+
+	/**
+	 * @description A list of all users.
+	 */
+
+	async users() {
+		return this.sendRequest('GET', 'users/');
+	};
+
+	/**
+	 * @description Get an individual user.
+	 * @param {*} name user name
+	 */
+
+	async getUser(name) {
+		return this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/');
+	};
+
+	/**
+	 * @description A list of all permissions for a given user.
+	 * @param {*} name user name
+	 */
+
+	async getUserPermissions(name) {
+		return this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/permissions/');
+	};
+
+	/**
+	 * @description Details of the currently authenticated user.
+	 */
+
+	async whoami() {
+		return this.sendRequest('GET', 'whoami/');
+	};
+
+	/**
+	 * @description A list of all permissions for all users.
+	 */
+
+	async permissions() {
+		return this.sendRequest('GET', 'permissions/');
+	};
+
+	/**
+	 * @description An individual permission of a user and virtual host. 
+	 * @param {*} vhost vhost name
+	 * @param {*} name permissin name
+	 */
+
+	async getPermissionsForUserOnVHost(vhost, name) {
+		return this.sendRequest('GET', '/permissions/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+	};
+
+	/**
+	 * @description Declares a test queue, then publishes and consumes a message. Intended for use by monitoring tools. If everything is working correctly, will return HTTP status 200 with body: {'status' : 'ok'}
+	 * @param {*} vhost 
+	 */
+
+	async alive(vhost) {
+		return this.sendRequest('GET', 'aliveness-test/' + encodeURIComponent(vhost) + '/');
+	};
+	
+	/**
+	 * 
+	 * @param {*} method Request Method, like GET, POST, PUT, DELETE
+	 * @param {*} path Request Path, like http://server-name:15672/rabbit/
+	 * @param {*} params Request Params
+	 */
+
+	async sendRequest(method, path, params = {}) {
+		return new Promise(async (resolve, reject) => {
+			const options = {
+				method,
+				body: qs.stringify(params),
+				form: true,
+				json: true,
+				url: `${this.protocol}://${this.username}:${this.password}@${this.hostname}/api/${path}${qs.stringify(params)}`
+			}
+			try {
+				resolve(await request(options));
+			} catch (e) {
+				reject(e);
+			}
+		})
+	}
 }
 
 module.exports = AmqpStats;

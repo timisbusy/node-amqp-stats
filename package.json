@@ -1,7 +1,7 @@
 {
   "name": "amqp-stats-promised",
-  "author": "Tim Atkinson <tim@gochime.com> (http://timisbusy.com)",
-  "version": "1.0.0",
+  "author": "Keven Leone",
+  "version": "1.0.2",
   "description": "Interface for RabbitMQ Management statistics. http://www.rabbitmq.com/management.html",
   "main": "index.js",
   "repository": {
@@ -9,7 +9,14 @@
   },
   "contributors": [
     {
-      "name": "Keven Leone - <keven.santos.sz@gmail.com> - https://github.com/kevenleone"
+      "name": "Keven Leone",
+      "email": "keven.santos.sz@gmail.com",
+      "url": "https://github.com/kevenleone"
+    }, 
+    {
+      "name": "Tim Atkinson",
+      "email": "tim@gochime.com",
+      "url": "http://timisbusy.com"
     }
   ],
   "scripts": {

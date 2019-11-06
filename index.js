@@ -22,7 +22,7 @@ class AmqpStats {
 	 */
 
 	async overview() {
-		return await this.sendRequest('GET', 'overview/');
+		return this.sendRequest('GET', 'overview/');
 	}
 
 	/**
@@ -30,7 +30,7 @@ class AmqpStats {
 	 */
 
 	async nodes() {
-		return await this.sendRequest('GET', 'nodes/');
+		return this.sendRequest('GET', 'nodes/');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class AmqpStats {
 	 */
 
 	async getNode(name) {
-		return await this.sendRequest('GET', 'nodes/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'nodes/' + encodeURIComponent(name) + '/');
 	}
 
 	/**
@@ -47,7 +47,7 @@ class AmqpStats {
 	 */
 	
 	async extensions() {
-		return await this.sendRequest('GET', 'extensions/');
+		return this.sendRequest('GET', 'extensions/');
 	}
 
 	/**
@@ -55,7 +55,7 @@ class AmqpStats {
 	 */
 
 	async definitions() {
-		return await this.sendRequest('GET', 'definitions/');
+		return this.sendRequest('GET', 'definitions/');
 	};
 
 	/**
@@ -63,7 +63,7 @@ class AmqpStats {
 	 */
 
 	async connections() {
-		return await this.sendRequest('GET', 'connections/');
+		return this.sendRequest('GET', 'connections/');
 	}
 	/**
 	 * @param {*} name Name of connection.
@@ -71,7 +71,7 @@ class AmqpStats {
 	 */
 
 	async getConnection(name) {
-		return await this.sendRequest('GET', 'connections/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'connections/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -79,7 +79,7 @@ class AmqpStats {
 	 */
 
 	async channels() {
-		return await this.sendRequest('GET', 'channels/');
+		return this.sendRequest('GET', 'channels/');
 	};
 
 	/**
@@ -88,7 +88,7 @@ class AmqpStats {
 	 */
 
 	async getChannel(name) {
-		return await this.sendRequest('GET', 'channels/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'channels/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -96,7 +96,7 @@ class AmqpStats {
 	 */
 
 	async exchanges() {
-		return await this.sendRequest('GET', 'exchanges/');
+		return this.sendRequest('GET', 'exchanges/');
 	};
 
 	/**
@@ -106,7 +106,7 @@ class AmqpStats {
 	 */
 
 	async getExchangesForVHost(vhost) {
-		return await this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/');
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/');
 	}
 
 	/**
@@ -116,7 +116,7 @@ class AmqpStats {
 	 */
 
 	async getExchange(vhost, name) {
-		return await this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -126,7 +126,7 @@ class AmqpStats {
 	 */
 
 	async getBindingsWithSource(vhost, name) {
-		return await this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/source/');
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/source/');
 	};
 
 	/**
@@ -136,7 +136,7 @@ class AmqpStats {
 	 */
 
 	async getBindingsWithDestination(vhost, name) {
-		return await this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/destination/');
+		return this.sendRequest('GET', 'exchanges/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/destination/');
 	};
 
 	/**
@@ -144,7 +144,7 @@ class AmqpStats {
 	 */
 
 	async queues() {
-		return await this.sendRequest('GET', 'queues/');
+		return this.sendRequest('GET', 'queues/');
 	};
 
 	/**
@@ -153,7 +153,7 @@ class AmqpStats {
 	 */
 
 	async getQueuesForVHost(vhost) {
-		return await this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/');
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/');
 	};
 
 	/**
@@ -163,7 +163,7 @@ class AmqpStats {
 	 */
 
 	async getQueue(vhost, name) {
-		return await this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -173,7 +173,7 @@ class AmqpStats {
 	 */
 
 	async getBindingsForQueue(vhost, name) {
-		return await this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/');
+		return this.sendRequest('GET', 'queues/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/bindings/');
 	};
 
 	/**
@@ -181,7 +181,7 @@ class AmqpStats {
 	 */
 
 	async bindings() {
-		return await this.sendRequest('GET', 'bindings/');
+		return this.sendRequest('GET', 'bindings/');
 	};
 
 	/**
@@ -190,7 +190,7 @@ class AmqpStats {
 	 */
 
 	async getBindingsForVHost(vhost) {
-		return await this.sendRequest('GET', 'bindings/' + encodeURIComponent(vhost) + '/');
+		return this.sendRequest('GET', 'bindings/' + encodeURIComponent(vhost) + '/');
 	};
 
 	/**
@@ -201,7 +201,7 @@ class AmqpStats {
 	 */
 
 	async getBindingsForExchangeAndQueue(vhost, exchange, queue) {
-		return await this.sendRequest('GET', `queues/${encodeURIComponent(vhost)}/e/${encodeURIComponent(exchange)}/q/${encodeURIComponent(queue)}/`);
+		return this.sendRequest('GET', `queues/${encodeURIComponent(vhost)}/e/${encodeURIComponent(exchange)}/q/${encodeURIComponent(queue)}/`);
 	};
 
 	/**
@@ -209,7 +209,7 @@ class AmqpStats {
 	 */
 
 	async vhosts() {
-		return await this.sendRequest('GET', 'vhosts/');
+		return this.sendRequest('GET', 'vhosts/');
 	};
 
 	/**
@@ -218,7 +218,7 @@ class AmqpStats {
 	 */
 
 	async getVHost(name) {
-		return await this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -227,7 +227,7 @@ class AmqpStats {
 	 */
 
 	async getVHostPermissions(name) {
-		return await this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/permissions/');
+		return this.sendRequest('GET', 'vhosts/' + encodeURIComponent(name) + '/permissions/');
 	};
 
 	/**
@@ -235,7 +235,7 @@ class AmqpStats {
 	 */
 
 	async users() {
-		return await this.sendRequest('GET', 'users/');
+		return this.sendRequest('GET', 'users/');
 	};
 
 	/**
@@ -244,7 +244,7 @@ class AmqpStats {
 	 */
 
 	async getUser(name) {
-		return await this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -253,7 +253,7 @@ class AmqpStats {
 	 */
 
 	async getUserPermissions(name) {
-		return await this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/permissions/');
+		return this.sendRequest('GET', 'users/' + encodeURIComponent(name) + '/permissions/');
 	};
 
 	/**
@@ -261,7 +261,7 @@ class AmqpStats {
 	 */
 
 	async whoami() {
-		return await this.sendRequest('GET', 'whoami/');
+		return this.sendRequest('GET', 'whoami/');
 	};
 
 	/**
@@ -269,7 +269,7 @@ class AmqpStats {
 	 */
 
 	async permissions() {
-		return await this.sendRequest('GET', 'permissions/');
+		return this.sendRequest('GET', 'permissions/');
 	};
 
 	/**
@@ -279,7 +279,7 @@ class AmqpStats {
 	 */
 
 	async getPermissionsForUserOnVHost(vhost, name) {
-		return await this.sendRequest('GET', '/permissions/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
+		return this.sendRequest('GET', '/permissions/' + encodeURIComponent(vhost) + '/' + encodeURIComponent(name) + '/');
 	};
 
 	/**
@@ -288,7 +288,7 @@ class AmqpStats {
 	 */
 
 	async alive(vhost) {
-		return await this.sendRequest('GET', 'aliveness-test/' + encodeURIComponent(vhost) + '/');
+		return this.sendRequest('GET', 'aliveness-test/' + encodeURIComponent(vhost) + '/');
 	};
 	
 	/**

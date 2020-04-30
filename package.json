@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "request": "~2.69.0",
-    "qs": "1.2.1"
+    "qs": "6.9.3"
   },
   "devDependencies": {}
 }

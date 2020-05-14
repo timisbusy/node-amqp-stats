@@ -178,12 +178,20 @@ AmqpStats.prototype.alive = function alivenessTest (vhost, callback) {
 // Utility used by all other calls. Can also be used seperately to make any API call not specified above.
 
 AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, callback) {
-  request({
+
+  var opts = {
     method: method,
-    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path + qs.stringify(params),
-    body: qs.stringify(params),
-    form: true
-  }, function(err, res, data){
+    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path
+  }
+
+  if ( method.toUpperCase() == 'GET' ) {
+    opts.url += qs.stringify(params)
+  } else {
+    opts.form = true
+    opts.body = qs.stringify(params)
+  }
+
+  request(opts, function(err, res, data){
     //console.log(err);
     //console.log(res.statusCode);
     //console.log('data: ', data);

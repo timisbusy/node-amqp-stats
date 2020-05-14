@@ -198,7 +198,7 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
 
       callback(err);
 
-    } else if (res.statusCode >= 300) {
+    } else if (res.statusCode >= 400) {
 
       let e = new Error(res.statusMessage);
       e.status = res.statusCode;

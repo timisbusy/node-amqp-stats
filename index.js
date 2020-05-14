@@ -185,33 +185,43 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
   }
 
   if ( method.toUpperCase() == 'GET' ) {
-    opts.url += '?' + qs.stringify(params)
+    opts.url += '?' + qs.stringify(params);
   } else {
-    opts.form = true
-    opts.body = qs.stringify(params)
+    opts.json = params;
   }
 
   request(opts, function(err, res, data){
     //console.log(err);
     //console.log(res.statusCode);
     //console.log('data: ', data);
-    if (err) { 
+    if (err) {
+
       callback(err);
-    } else if (res.statusCode > 201) {
-      callback(new Error("Status code: "+ res.statusCode));
+
+    } else if (res.statusCode >= 300) {
+
+      let e = new Error(res.statusMessage);
+      e.status = res.statusCode;
+
+      callback(e);
+
     } else if (data === "Not found.") {
+
       callback(new Error("Undefined."));
+
     } else {
+
       var out = null;
       try {
         out = JSON.parse(data);
-      } catch(e) { 
+      } catch(e) {
         // do nothing
       } finally {
         if ( !out ) {
           out = {};
         }
       }
+
       callback(null, res, out);
     }
   });

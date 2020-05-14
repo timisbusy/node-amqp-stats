@@ -185,7 +185,7 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
   }
 
   if ( method.toUpperCase() == 'GET' ) {
-    opts.url += qs.stringify(params)
+    opts.url += '?' + qs.stringify(params)
   } else {
     opts.form = true
     opts.body = qs.stringify(params)
@@ -197,7 +197,7 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
     //console.log('data: ', data);
     if (err) { 
       callback(err);
-    } else if (res.statusCode > 200) {
+    } else if (res.statusCode > 201) {
       callback(new Error("Status code: "+ res.statusCode));
     } else if (data === "Not found.") {
       callback(new Error("Undefined."));

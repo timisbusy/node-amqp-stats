@@ -202,7 +202,16 @@ AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, ca
     } else if (data === "Not found.") {
       callback(new Error("Undefined."));
     } else {
-      data = JSON.parse(data);
+      data = null;
+      try {
+        data = JSON.parse(data);
+      } catch(e) { 
+        // do nothing
+      } finally {
+        if ( !data ) {
+          data = {};
+        }
+      }
       callback(null, res, data);
     }
   });

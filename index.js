@@ -178,24 +178,51 @@ AmqpStats.prototype.alive = function alivenessTest (vhost, callback) {
 // Utility used by all other calls. Can also be used seperately to make any API call not specified above.
 
 AmqpStats.prototype.sendRequest = function sendRequest (method, path, params, callback) {
-  request({
+
+  var opts = {
     method: method,
-    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path + qs.stringify(params),
-    body: qs.stringify(params),
-    form: true
-  }, function(err, res, data){
+    url: this.protocol + "://" + this.username + ":" + this.password + "@" + this.hostname + "/api/" + path
+  }
+
+  if ( method.toUpperCase() == 'GET' ) {
+    opts.url += '?' + qs.stringify(params);
+  } else {
+    opts.json = params;
+  }
+
+  request(opts, function(err, res, data){
     //console.log(err);
     //console.log(res.statusCode);
     //console.log('data: ', data);
-    if (err) { 
+    if (err) {
+
       callback(err);
-    } else if (res.statusCode > 200) {
-      callback(new Error("Status code: "+ res.statusCode));
+
+    } else if (res.statusCode >= 400) {
+
+      let e = new Error(res.statusMessage);
+      e.status = res.statusCode;
+
+      callback(e);
+
     } else if (data === "Not found.") {
+
       callback(new Error("Undefined."));
+
     } else {
-      data = JSON.parse(data);
-      callback(null, res, data);
+
+      var out = null;
+      try {
+        out = JSON.parse(data);
+      } catch(e) {
+        // do nothing
+      } finally {
+        if ( !out ) {
+          out = {};
+        }
+      }
+
+      callback(null, res, out);
     }
   });
 }

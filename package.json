@@ -8,12 +8,12 @@
   },
   "main": "index.js",
   "engines": {
-    "node": "~0.6.0"
+    "node": ">=8"
   },
   "license": "MIT",
   "dependencies": {
-    "request": "~2.69.0",
-    "qs": "1.2.1"
+    "qs": "^6.9.4",
+    "request": "^2.88.2"
   },
   "devDependencies": {}
 }
